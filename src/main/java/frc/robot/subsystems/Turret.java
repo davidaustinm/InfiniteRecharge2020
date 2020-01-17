@@ -20,8 +20,10 @@ public class Turret extends SubsystemBase {
   public Turret() {
     spin = new TalonSRX(11);
     tilt = new TalonSRX(12);
+    tilt.setInverted(true);
   }
   public void setSpinPower(double power){
+    System.out.println(power);
     spin.set(ControlMode.PercentOutput, power);
   }
   public void setTiltPower(double power){

@@ -21,11 +21,13 @@ public class Robot extends TimedRobot {
   public static OI oi = new OI();
   public static DriveTrain driveTrain = new DriveTrain();
   public static Turret turret = new Turret();
+  public static LimeLight limelight = new LimeLight();
 
   @Override
   public void robotInit() {
     driveTrain.setDefaultCommand(new DriveTrainCommand());
     turret.setDefaultCommand(new TurretCommand());
+    limelight.setDefaultCommand(new LimeLightCommand());
   }
 
 
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    m_autonomousCommand = new TrackTarget();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -58,6 +61,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    (new TrackTarget()).schedule();
   }
 
   @Override
