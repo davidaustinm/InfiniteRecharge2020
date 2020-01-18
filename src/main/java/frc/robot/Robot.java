@@ -12,16 +12,18 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
+import frc.robot.commands.autonomous.SimpleAutonomous;
 import frc.robot.subsystems.*;
 
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  public static OI oi = new OI();
+
   public static DriveTrain driveTrain = new DriveTrain();
   public static Turret turret = new Turret();
   public static LimeLight limelight = new LimeLight();
+  public static OI oi = new OI();
 
   @Override
   public void robotInit() {
@@ -46,7 +48,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new TrackTarget();
+    m_autonomousCommand = new SimpleAutonomous();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -61,11 +63,12 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    (new TrackTarget()).schedule();
   }
 
   @Override
   public void teleopPeriodic() {
+    double[] driveDistance = driveTrain.getDriveDistance();
+    System.out.println(driveDistance[0] + "  " + driveDistance[1]);
   }
 
   @Override

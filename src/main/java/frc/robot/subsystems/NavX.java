@@ -7,27 +7,26 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Turret extends SubsystemBase {
-  TalonSRX spin, tilt;
+public class NavX extends SubsystemBase {
+  AHRS navx;
   /**
-   * Creates a new Turret.
+   * Creates a new NavX.
    */
-  public Turret() {
-    spin = new TalonSRX(11);
-    tilt = new TalonSRX(12);
-    tilt.setInverted(true);
+  public NavX() {
+    try {
+			navx = new AHRS(SerialPort.Port.kMXP);
+		} catch (RuntimeException ex ) {
+			System.out.println("Error instantiating navX MXP:  " + ex.getMessage());
   }
-  public void setSpinPower(double power){
-    spin.set(ControlMode.PercentOutput, power);
+
+  public double getHeading() {
+    return navx.getYaw();
   }
-  public void setTiltPower(double power){
-    tilt.set(ControlMode.PercentOutput, power);
-  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

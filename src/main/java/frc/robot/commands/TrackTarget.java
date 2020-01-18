@@ -43,7 +43,7 @@ public class TrackTarget extends CommandBase {
     if(tiltPower<-1)tiltPower = -1;
     if(spinPower>1)spinPower = 1;
     if(spinPower<-1)spinPower = -1;
-    System.out.println(spinPower);
+    System.out.println("trackTarget" + spinPower);
     Robot.turret.setSpinPower(spinPower);
     Robot.turret.setTiltPower(tiltPower);
   }

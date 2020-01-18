@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.TrackTarget;
+import frc.robot.utilities.XboxTrigger;
 
 /**
  * Add your docs here.
@@ -15,9 +17,17 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
     public XboxController driver;
     public XboxController operator;
+    TrackTarget trackTarget;
+
     public OI(){
+        trackTarget = new TrackTarget();
         driver = new XboxController(0);
         operator = new XboxController(1);
+        XboxTrigger trackingOn = new XboxTrigger(operator, XboxTrigger.LB);
+        trackingOn.whenActive(trackTarget);
+        XboxTrigger trackingOff = new XboxTrigger(operator, XboxTrigger.RB);
+        trackingOff.cancelWhenActive(trackTarget);
+
     }
 
 }
