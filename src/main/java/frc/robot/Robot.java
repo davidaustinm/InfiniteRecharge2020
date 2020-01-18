@@ -23,6 +23,8 @@ public class Robot extends TimedRobot {
   public static DriveTrain driveTrain = new DriveTrain();
   public static Turret turret = new Turret();
   public static LimeLight limelight = new LimeLight();
+  public static NavX navx = new NavX();
+    
   public static OI oi = new OI();
 
   @Override
@@ -30,6 +32,7 @@ public class Robot extends TimedRobot {
     driveTrain.setDefaultCommand(new DriveTrainCommand());
     turret.setDefaultCommand(new TurretCommand());
     limelight.setDefaultCommand(new LimeLightCommand());
+
   }
 
 
@@ -48,6 +51,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    navx.resetGyro();
     m_autonomousCommand = new SimpleAutonomous();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -63,12 +67,14 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    navx.resetGyro();
   }
 
   @Override
   public void teleopPeriodic() {
-    double[] driveDistance = driveTrain.getDriveDistance();
-    System.out.println(driveDistance[0] + "  " + driveDistance[1]);
+    // double[] driveDistance = driveTrain.getDriveDistance();
+    // System.out.println(driveDistance[0] + "  " + driveDistance[1]);
+    System.out.println(navx.getHeading());
   }
 
   @Override
