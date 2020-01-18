@@ -13,15 +13,23 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
-  TalonSRX spin, tilt;
+  TalonSRX spin, tilt, shootMotor1, shootMotor2;
   /**
    * Creates a new Turret.
    */
   public Turret() {
     spin = new TalonSRX(11);
     tilt = new TalonSRX(12);
+    shootMotor1 = new TalonSRX(15);
+    shootMotor2 = new TalonSRX(23);
     tilt.setInverted(true);
   }
+
+  public void setTurretPower(double power){
+    shootMotor1.set(ControlMode.PercentOutput, power);
+    shootMotor2.set(ControlMode.PercentOutput, -power);
+  }
+
   public void setSpinPower(double power){
     spin.set(ControlMode.PercentOutput, power);
   }

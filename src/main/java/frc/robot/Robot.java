@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    driveTrain.setDefaultCommand(new DriveTrainCommand());
+    driveTrain.setDefaultCommand(new ArcadeDriveCommand());
     turret.setDefaultCommand(new TurretCommand());
     limelight.setDefaultCommand(new LimeLightCommand());
 

@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.TrackTarget;
+import frc.robot.commands.TurretShooterCommand;
 import frc.robot.utilities.XboxTrigger;
 
 /**
@@ -28,6 +29,8 @@ public class OI {
         XboxTrigger trackingOff = new XboxTrigger(operator, XboxTrigger.RB);
         trackingOff.cancelWhenActive(trackTarget);
 
+        XboxTrigger turretShoot = new XboxTrigger(driver, XboxTrigger.DPADUP);
+        turretShoot.whileActiveContinuous(new TurretShooterCommand(), true);
     }
 
 }
