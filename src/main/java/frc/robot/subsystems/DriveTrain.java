@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveTrain extends SubsystemBase {
   TalonSRX leftFront,leftRear,rightRear,rightFront;
   Encoder leftDriveEncoder, rightDriveEncoder;
+  int leftDriveOffset = 0, rightDriveOffset= 0;
+  double leftDistanceOffset = 0, rightDistanceOffset = 0;
   /**
    * Creates a new DriveTrain.
    */
@@ -34,26 +36,33 @@ public class DriveTrain extends SubsystemBase {
       rightDriveEncoder.setDistancePerPulse(0.0414);
   }
 
+  public void resetDriveEncoders() {
+    leftDriveOffset = leftDriveEncoder.get();
+    rightDriveOffset = rightDriveEncoder.get();
+    leftDistanceOffset = leftDriveEncoder.getDistance();
+    rightDistanceOffset = rightDriveEncoder.getDistance();
+  }
+
   public int[] getDriveEncoder(){
     return new int[] {
-      leftDriveEncoder.get(),
-      rightDriveEncoder.get()
+      leftDriveEncoder.get() - leftDriveOffset,
+      rightDriveEncoder.get() - rightDriveOffset
     };
   }
 
   public double[] getDriveDistance(){
     return new double[] {
-      leftDriveEncoder.getDistance(),
-      rightDriveEncoder.getDistance()
+      getLeftDistance(),
+      getRightDistance()
     };
   }
   
   public double getLeftDistance(){
-    return leftDriveEncoder.getDistance();
+    return leftDriveEncoder.getDistance() - leftDistanceOffset;
   }
 
   public double getRightDistance(){
-    return rightDriveEncoder.getDistance();
+    return rightDriveEncoder.getDistance() - rightDistanceOffset;
   }
 
   public void setPower(double leftPower,double rightPower){
