@@ -87,4 +87,10 @@ public class VectorMath {
         angle = Math.toRadians(angle);
         return new double[] {dist*Math.cos(angle), dist*Math.sin(angle)};
     }
+
+    public double normalizeAngle(double angle, double cutpoint) {
+        while (angle > cutpoint) angle -= 360;
+        while (angle < cutpoint-360) angle += 360;
+        return angle;
+    }
 }
