@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
   TalonSRX spin, tilt, shootMotor1, shootMotor2;
-  /**
-   * Creates a new Turret.
-   */
+
   public Turret() {
     spin = new TalonSRX(11);
     tilt = new TalonSRX(12);
@@ -26,18 +24,19 @@ public class Turret extends SubsystemBase {
   }
 
   public void setTurretPower(double power){
-    shootMotor1.set(ControlMode.PercentOutput, power);
+    shootMotor1.set(ControlMode.PercentOutput, -power);
     shootMotor2.set(ControlMode.PercentOutput, -power);
   }
 
   public void setSpinPower(double power){
     spin.set(ControlMode.PercentOutput, power);
   }
+  
   public void setTiltPower(double power){
     tilt.set(ControlMode.PercentOutput, power);
   }
+  
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

@@ -27,7 +27,7 @@ public class TurretShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.turret.setTurretPower(0.5);
+    Robot.turret.setTurretPower(1);
   }
 
   // Called once the command ends or is interrupted.

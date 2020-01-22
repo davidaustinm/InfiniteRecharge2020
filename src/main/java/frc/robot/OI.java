@@ -12,16 +12,15 @@ import frc.robot.commands.TrackTarget;
 import frc.robot.commands.TurretShooterCommand;
 import frc.robot.utilities.XboxTrigger;
 
-/**
- * Add your docs here.
- */
 public class OI {
     public XboxController driver;
     public XboxController operator;
     TrackTarget trackTarget;
+    TurretShooterCommand turretShootCommand;
 
     public OI(){
         trackTarget = new TrackTarget();
+        turretShootCommand = new TurretShooterCommand();
         driver = new XboxController(0);
         operator = new XboxController(1);
         XboxTrigger trackingOn = new XboxTrigger(operator, XboxTrigger.LB);
@@ -29,8 +28,10 @@ public class OI {
         XboxTrigger trackingOff = new XboxTrigger(operator, XboxTrigger.RB);
         trackingOff.cancelWhenActive(trackTarget);
 
-        XboxTrigger turretShoot = new XboxTrigger(driver, XboxTrigger.DPADUP);
-        turretShoot.whileActiveContinuous(new TurretShooterCommand(), true);
+        XboxTrigger turretShoot = new XboxTrigger(operator, XboxTrigger.DPADUP);
+        turretShoot.toggleWhenActive(turretShootCommand, true);
+
+        
     }
 
 }
