@@ -93,4 +93,25 @@ public class VectorMath {
         while (angle < cutpoint-360) angle += 360;
         return angle;
     }
+
+    public static double max(double[] u) {
+        double max = u[0];
+        for (int i = 0; i < u.length; i++) {
+            if (u[i] > max) max = u[i];
+        }
+        return max;
+    }
+    public static double min(double[] u) {
+        double min = u[0];
+        for (int i = 0; i < u.length; i++) {
+            if (u[i] < min) min = u[i];
+        }
+        return min;
+    }
+
+    public static double mod(double x, double n) {
+        while(x > n) x -= n;
+        while(x < 0) x += n;
+        return x;
+    }
 }
