@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
   public static Turret turret = new Turret();
   public static LimeLight limelight = new LimeLight();
   public static NavX navx = new NavX();
+  public static ColorSensor colorSensor = new ColorSensor();
     
   public static OI oi = new OI();
 
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    colorSensor.displayColor();
   }
 
   @Override
