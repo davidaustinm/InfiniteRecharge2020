@@ -17,23 +17,67 @@ import frc.robot.utilities.VectorMath;
 
 public class ColorSensor extends SubsystemBase {
   I2C.Port i2cPort = I2C.Port.kOnboard;
-  ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+  ColorSensorV3 colorSensor; 
+  Color detectedColor;
+  int colorCode;
+
+  public static final int YELLOW = 0;
+  public static final int RED = 1;
+  public static final int GREEN = 2;
+  public static final int BLUE = 3;
   /**
    * Creates a new ColorSensor.
    */
   public ColorSensor() {
+    colorSensor = new ColorSensorV3(i2cPort);
+  }
 
+  public void readColor() {
+    detectedColor = colorSensor.getColor();
+    double hue = convertToHue(detectedColor);
+    if (hue > 300 || hue < 60) {
+      colorCode = RED;
+      return;
+    }
+    if (hue < 100) {
+      colorCode = YELLOW;
+      return;
+    }
+    if (hue < 150) {
+      colorCode = GREEN;
+      return;
+    }
+    colorCode = BLUE;
+  }
+
+  public double getHue() {
+    return convertToHue(detectedColor);
+  }
+
+  public double getRed() {
+    return detectedColor.red;
+  }
+
+  public double getGreen() {
+    return detectedColor.green;
+  }
+
+  public double getBlue() {
+    return detectedColor.blue;
+  }
+
+  public int getColor() {
+    return colorCode;
   }
 
   public void displayColor(){
-    Color detectedColor = m_colorSensor.getColor();
     SmartDashboard.putNumber("red", detectedColor.red);
     SmartDashboard.putNumber("green", detectedColor.green);
     SmartDashboard.putNumber("blue", detectedColor.blue);
-    SmartDashboard.putNumber("hue", getHue(detectedColor));
+    SmartDashboard.putNumber("hue", convertToHue(detectedColor));
   }
 
-  public double getHue(Color color) {
+  public double convertToHue(Color color) {
     double[] colorArray = new double[] {color.red, color.green, color.blue};
     double cmax = VectorMath.max(colorArray);
     double cmin = VectorMath.min(colorArray);
