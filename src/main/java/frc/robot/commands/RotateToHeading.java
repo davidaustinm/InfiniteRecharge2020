@@ -9,41 +9,38 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.utilities.VectorMath;
 
-public class DriveForDistance extends CommandBase {
-  double stopDistance;
-  double power;
+public class RotateToHeading extends CommandBase {
   double heading;
-  double currentPower;
-  double distance;
+  double power;
+  double cutpoint;
   /**
-   * Creates a new DriveForDistance.
+   * Creates a new RotateToHeading.
    */
-  public DriveForDistance(double power, int distance, double heading) {
+  public RotateToHeading(double power, double heading) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.driveTrain);
     this.power = power;
-    this.distance = distance;
     this.heading = heading;
+    cutpoint = heading + 180;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stopDistance = Robot.driveTrain.getLeftDistance() + distance;
-    currentPower = 0.2;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    currentPower = currentPower + 0.03;
-    if(currentPower>power)currentPower = power;
-    double remainingDistance = stopDistance - Robot.driveTrain.getLeftDistance();
-    if(remainingDistance<15)currentPower = power * remainingDistance/15;
-    double angleError = heading - Robot.navx.getHeading();
-    double correction = 0.02*angleError;
-    Robot.driveTrain.setPower(currentPower - correction, currentPower + correction);
+    double angle = VectorMath.normalizeAngle(Robot.navx.getHeading(), cutpoint);
+    double angleError = heading - angle;
+    double powerFactor = 0.04 * angleError;
+    if (powerFactor > 1) powerFactor = 1;
+    if (powerFactor <-1) powerFactor = -1;
+    Robot.driveTrain.setPower(-powerFactor*power, powerFactor*power);
+    System.out.println(Robot.navx.getHeading());
   }
 
   // Called once the command ends or is interrupted.
@@ -55,6 +52,6 @@ public class DriveForDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.driveTrain.getLeftDistance()>stopDistance;
+    return Math.abs(heading-Robot.navx.getHeading()) < 4;
   }
 }

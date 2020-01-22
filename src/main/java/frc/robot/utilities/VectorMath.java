@@ -78,17 +78,17 @@ public class VectorMath {
         return sum/u.length;
     }
 
-    public double angle(double[] src, double[] dest) {
+    public static double angle(double[] src, double[] dest) {
         double[] diff = sub(src, dest);
         return Math.atan2(diff[1], diff[0]);
     }
 
-    public double[] displacement(double dist, double angle) {
+    public static double[] displacement(double dist, double angle) {
         angle = Math.toRadians(angle);
         return new double[] {dist*Math.cos(angle), dist*Math.sin(angle)};
     }
 
-    public double normalizeAngle(double angle, double cutpoint) {
+    public static double normalizeAngle(double angle, double cutpoint) {
         while (angle > cutpoint) angle -= 360;
         while (angle < cutpoint-360) angle += 360;
         return angle;

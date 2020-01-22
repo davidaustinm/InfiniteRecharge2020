@@ -23,8 +23,8 @@ public class SimpleAutonomous extends SequentialCommandGroup {
     // super();
     addCommands(
       new DriveForDistance(0.6, 50, 0),
-      new WaitForTime(1000),
-      new DriveForDistance(0.6, 50, 0)
+      new RotateToHeading(0.8, -90),
+      new DriveForDistance(0.6, 50, -90)
     );
   }
 }

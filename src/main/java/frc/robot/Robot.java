@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     navx.resetGyro();
-    m_autonomousCommand = new DriveForDistance(0.8, 102, 0);
+    m_autonomousCommand = new SimpleAutonomous();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
