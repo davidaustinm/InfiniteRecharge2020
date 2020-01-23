@@ -25,6 +25,7 @@ public class ColorSensor extends SubsystemBase {
   public static final int RED = 1;
   public static final int GREEN = 2;
   public static final int BLUE = 3;
+  public static final String[] colors = {"Yellow", "Red", "Green", "Blue"};
   /**
    * Creates a new ColorSensor.
    */
@@ -75,7 +76,7 @@ public class ColorSensor extends SubsystemBase {
     SmartDashboard.putNumber("green", detectedColor.green);
     SmartDashboard.putNumber("blue", detectedColor.blue);
     SmartDashboard.putNumber("hue", convertToHue(detectedColor));
-    SmartDashboard.putNumber("color code", getColor());
+    SmartDashboard.putString("color", colors[getColor()]);
   }
 
   public double convertToHue(Color color) {
