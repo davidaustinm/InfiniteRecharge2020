@@ -75,6 +75,7 @@ public class ColorSensor extends SubsystemBase {
     SmartDashboard.putNumber("green", detectedColor.green);
     SmartDashboard.putNumber("blue", detectedColor.blue);
     SmartDashboard.putNumber("hue", convertToHue(detectedColor));
+    SmartDashboard.putNumber("color code", getColor());
   }
 
   public double convertToHue(Color color) {
