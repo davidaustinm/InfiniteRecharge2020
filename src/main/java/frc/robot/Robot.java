@@ -7,9 +7,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Talon;
+
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
@@ -20,8 +19,6 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  Talon intake0 = new Talon(1);
-  Talon intake1 = new Talon(0);
 
   public static DriveTrain driveTrain = new DriveTrain();
   public static Turret turret = new Turret();
@@ -38,14 +35,14 @@ public class Robot extends TimedRobot {
     driveTrain.setDefaultCommand(new ArcadeDriveCommand());
     turret.setDefaultCommand(new TurretCommand());
     limelight.setDefaultCommand(new LimeLightCommand());
-
+    colorSensor.setDefaultCommand(new ColorSensorCommand());
   }
 
 
   @Override
   public void robotPeriodic() {
+    colorSensor.displayColor();
     CommandScheduler.getInstance().run();
-    // colorSensor.displayColor();
   }
 
   @Override
@@ -81,9 +78,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // double[] driveDistance = driveTrain.getDriveDistance();
     // System.out.println(driveDistance[0] + "  " + driveDistance[1]);
-    System.out.println(sensors.getHeading());
-    intake1.set(oi.operator.getY(Hand.kLeft));
-    intake0.set(oi.operator.getY(Hand.kLeft));
+    System.out.println(navx.getHeading());
   }
 
   @Override
