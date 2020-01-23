@@ -16,7 +16,7 @@ public class TurretShooterCommand extends CommandBase {
    */
   public TurretShooterCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.turret);
+    addRequirements(Robot.turretShooter);
   }
 
   // Called when the command is initially scheduled.
@@ -27,13 +27,13 @@ public class TurretShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.turret.setTurretPower(1);
+    Robot.turretShooter.setTurretPower(1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.turret.setTurretPower(0);
+    Robot.turretShooter.setTurretPower(0);
   }
 
   // Returns true when the command should end.

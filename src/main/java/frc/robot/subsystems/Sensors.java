@@ -9,14 +9,19 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class NavX extends SubsystemBase {
+public class Sensors extends SubsystemBase {
   AHRS navx;
   double gyroOffset = 0;
 
-  public NavX() {
+  double positionX = 0;
+  double positionY = 0;
+
+  public double ENCODER_COUNTS_PER_INCH = 24.14;
+
+  public Sensors() {
     try {
 			navx = new AHRS(Port.kMXP);
 		} catch (RuntimeException ex ) {
@@ -35,6 +40,11 @@ public class NavX extends SubsystemBase {
   public void resetGyro(){
     gyroOffset = readGyro();
   }
+
+  public double[] getPosition(){
+    return new double[2];
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

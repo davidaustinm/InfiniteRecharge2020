@@ -12,25 +12,21 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Turret extends SubsystemBase {
-  TalonSRX spin, tilt;
+public class TurretShooter extends SubsystemBase {
+  TalonSRX shootMotor1, shootMotor2;
 
-  public Turret() {
-    spin = new TalonSRX(11);
-    tilt = new TalonSRX(12);
-
-    tilt.setInverted(true);
+  public TurretShooter() {
+    shootMotor1 = new TalonSRX(15);
+    shootMotor2 = new TalonSRX(23);
   }
 
-  public void setSpinPower(double power){
-    spin.set(ControlMode.PercentOutput, power);
+  public void setTurretPower(double power){
+    shootMotor1.set(ControlMode.PercentOutput, -power);
+    shootMotor2.set(ControlMode.PercentOutput, -power);
   }
-  
-  public void setTiltPower(double power){
-    tilt.set(ControlMode.PercentOutput, power);
-  }
-  
+
   @Override
   public void periodic() {
+    // This method will be called once per scheduler run
   }
 }

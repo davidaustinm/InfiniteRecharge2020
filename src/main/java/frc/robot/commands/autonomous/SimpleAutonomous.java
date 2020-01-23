@@ -22,9 +22,11 @@ public class SimpleAutonomous extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     // super();
     addCommands(
-      new DriveForDistance(0.6, 50, 0),
-      new RotateToHeading(0.8, -90),
-      new DriveForDistance(0.6, 50, -90)
+      // new DriveForDistance(0.6, 50, 0),
+      // new RotateToHeading(0.8, -90),
+      // new DriveForDistance(0.6, 50, -90)
+
+      new DriveToPoint(5, 0, 0.5)
     );
   }
 }
