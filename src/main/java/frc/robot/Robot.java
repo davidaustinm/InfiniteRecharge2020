@@ -22,11 +22,13 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain driveTrain = new DriveTrain();
   public static Turret turret = new Turret();
+  public static TurretShooter turretShooter = new TurretShooter();
   public static LimeLight limelight = new LimeLight();
-  public static NavX navx = new NavX();
+  // public static NavX navx = new NavX();
   public static ColorSensor colorSensor = new ColorSensor();
     
   public static OI oi = new OI();
+  public static Sensors sensors = new Sensors();
 
   @Override
   public void robotInit() {
@@ -53,7 +55,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    navx.resetGyro();
+    sensors.resetGyro();
     m_autonomousCommand = new SimpleAutonomous();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -69,7 +71,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    navx.resetGyro();
+    sensors.resetGyro();
   }
 
   @Override
