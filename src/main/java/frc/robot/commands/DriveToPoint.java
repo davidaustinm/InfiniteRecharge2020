@@ -30,16 +30,16 @@ public class DriveToPoint extends CommandBase {
 
   @Override
   public void execute() {
-    double[] position = Robot.sensors.getPosition();
+    double[] position = Robot.position.getPosition();
     double changeInX = targetX - position[0];
     double changeInY = targetY - position[1];
     distance = Math.sqrt(changeInX * changeInX + changeInY * changeInY);
     double heading = Math.toDegrees(Math.atan2(changeInY, changeInX));
-    double error = heading - Robot.sensors.getHeading();
+    double error = heading - Robot.navx.getHeading();
     while(error > 180) error -= 360;
     while(error < -180) error += 360;
     double correction = 0.02 * error;
-    double ramp = 0.01 * distance * Robot.sensors.ENCODER_COUNTS_PER_INCH;
+    double ramp = 0.05 * distance;
     if(ramp > 1) ramp = 1;
     Robot.driveTrain.setPower((speed - correction) * ramp, (speed + correction) * ramp);
   }
@@ -53,5 +53,6 @@ public class DriveToPoint extends CommandBase {
   public boolean isFinished() {
     boolean finished = distance > lastDistance;
     lastDistance = distance;
-    return finished;  }
+    return finished;  
+  }
 }

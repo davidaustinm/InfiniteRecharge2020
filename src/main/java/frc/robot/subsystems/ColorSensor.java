@@ -40,7 +40,7 @@ public class ColorSensor extends SubsystemBase {
       colorCode = RED;
       return;
     }
-    if (hue < 100) {
+    if (hue < 110) {
       colorCode = YELLOW;
       return;
     }
@@ -72,6 +72,10 @@ public class ColorSensor extends SubsystemBase {
   }
 
   public void displayColor(){
+    if (detectedColor == null) {
+      System.out.println("null color");
+      return;
+    }
     SmartDashboard.putNumber("red", detectedColor.red);
     SmartDashboard.putNumber("green", detectedColor.green);
     SmartDashboard.putNumber("blue", detectedColor.blue);

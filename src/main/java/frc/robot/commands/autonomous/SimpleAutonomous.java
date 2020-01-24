@@ -26,7 +26,9 @@ public class SimpleAutonomous extends SequentialCommandGroup {
       // new RotateToHeading(0.8, -90),
       // new DriveForDistance(0.6, 50, -90)
 
-      new DriveToPoint(5, 0, 0.5)
+      new DriveToPoint(100, 0, 0.6),
+      new RotateToHeading(0.8, -90),
+      new DriveToPoint(100, -100, 0.6)
     );
   }
 }

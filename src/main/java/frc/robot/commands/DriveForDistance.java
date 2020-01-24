@@ -41,7 +41,7 @@ public class DriveForDistance extends CommandBase {
     if(currentPower>power)currentPower = power;
     double remainingDistance = stopDistance - Robot.driveTrain.getLeftDistance();
     if(remainingDistance<15)currentPower = power * remainingDistance/15;
-    double angleError = heading - Robot.sensors.getHeading();
+    double angleError = heading - Robot.navx.getHeading();
     double correction = 0.02*angleError;
     Robot.driveTrain.setPower(currentPower - correction, currentPower + correction);
   }
