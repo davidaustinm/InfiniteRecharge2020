@@ -73,7 +73,6 @@ public class ColorSensor extends SubsystemBase {
 
   public void displayColor(){
     if (detectedColor == null) {
-      System.out.println("null color");
       return;
     }
     SmartDashboard.putNumber("red", detectedColor.red);
