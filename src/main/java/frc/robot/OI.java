@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ColorChangeCount;
 import frc.robot.commands.TrackTarget;
 import frc.robot.commands.TurretShooterCommand;
 import frc.robot.utilities.XboxTrigger;
@@ -30,7 +31,8 @@ public class OI {
 
         XboxTrigger turretShoot = new XboxTrigger(operator, XboxTrigger.DPADUP);
         turretShoot.toggleWhenActive(turretShootCommand, true);
-
+        XboxTrigger colorCount = new XboxTrigger(operator, XboxTrigger.DPADLEFT);
+        colorCount.toggleWhenActive(new ColorChangeCount());
         
     }
 
