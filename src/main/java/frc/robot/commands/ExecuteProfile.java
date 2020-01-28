@@ -52,6 +52,7 @@ public class ExecuteProfile extends CommandBase implements Runnable {
   @Override
   public void end(boolean interrupted) {
     Robot.driveTrain.setPower(0, 0);
+    notifier.stop();
   }
 
   // Returns true when the command should end.
@@ -71,6 +72,7 @@ public class ExecuteProfile extends CommandBase implements Runnable {
   public void run() {
     if(count >= profileLength) {
       Robot.driveTrain.setPower(0,0);
+      stopNotifier();
       return;
     }
     double[] data = profile[count];
@@ -86,7 +88,6 @@ public class ExecuteProfile extends CommandBase implements Runnable {
     rightPower += 0.02 * angleError;
     Robot.driveTrain.setPower(leftPower, rightPower);
     count += 1;
-    if (count >= profileLength) stopNotifier();
     System.out.println(count + " " + vmax + " " + leftPower + " " + rightPower);
   }
 }
