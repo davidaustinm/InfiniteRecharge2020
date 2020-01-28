@@ -17,7 +17,7 @@ import frc.robot.utilities.VectorMath;
 
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private Command m_autonomousCommand = new ExecuteProfile("speed-profile.csv");;
 
 
   public static DriveTrain driveTrain = new DriveTrain();
@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     navx.resetGyro();
     position.resetPosition();
-    m_autonomousCommand = new ExecuteProfile("joshtest.profile.csv");
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

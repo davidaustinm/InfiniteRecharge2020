@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.utilities.CSVReader;
+import frc.robot.utilities.VectorMath;
 
 public class ExecuteProfile extends CommandBase implements Runnable {
   double[][] profile;
@@ -83,11 +84,11 @@ public class ExecuteProfile extends CommandBase implements Runnable {
     double rightError = data[2] - driveDistance[1];
     leftPower += 0.04 * leftError;
     rightPower += 0.04 * rightError;
-    double angleError = data[4] - Robot.navx.getHeading();
+    double angleError = VectorMath.normalizeAngle(data[4] - Robot.navx.getHeading(), 180);
     leftPower -= 0.02 * angleError;
     rightPower += 0.02 * angleError;
     Robot.driveTrain.setPower(leftPower, rightPower);
     count += 1;
-    System.out.println(count + " " + vmax + " " + leftPower + " " + rightPower);
+    // System.out.println(count + " " + vmax + " " + leftPower + " " + rightPower);
   }
 }
