@@ -8,6 +8,7 @@
 package frc.robot;
 
 
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.SimpleAutonomous;
 import frc.robot.subsystems.*;
+import frc.robot.utilities.VectorMath;
 
 
 public class Robot extends TimedRobot {
@@ -58,7 +60,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     navx.resetGyro();
     position.resetPosition();
-    m_autonomousCommand = new SimpleAutonomous();
+    m_autonomousCommand = new ExecuteProfile("joshtest.profile.csv");
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -67,9 +69,13 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
   }
-
+  double[] lastDriveEncoders;
+  long lastTime;
   @Override
   public void teleopInit() {
+    lastDriveEncoders = driveTrain.getDriveDistance();
+    lastTime = System.currentTimeMillis();
+    // System.out.println(Filesystem.getDeployDirectory());
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -82,6 +88,14 @@ public class Robot extends TimedRobot {
     
     colorSensor.displayColor();
     SmartDashboard.putNumber("gyro", navx.readGyro());
+    double[] driveEncoders = driveTrain.getDriveDistance();
+    long time = System.currentTimeMillis();
+    double distance = VectorMath.avg(VectorMath.sub(driveEncoders, lastDriveEncoders));
+    double velocity = distance/(time - lastTime) * 1000;
+    lastTime = time;
+    lastDriveEncoders = driveEncoders;
+    // System.out.println(velocity);
+    SmartDashboard.putNumber("velocity", velocity);
   }
 
   @Override
