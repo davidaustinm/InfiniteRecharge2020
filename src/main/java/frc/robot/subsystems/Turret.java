@@ -8,14 +8,20 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.utilities.AS5600EncoderPwm;
 
 public class Turret extends SubsystemBase {
+  // TalonSRX spin;
   TalonSRX spin, tilt;
 
+  // private final AS5600EncoderPwm encoderPwm = new AS5600EncoderPwm(spin.getSensorCollection()); //Absolute encoder for new robot turret
+
   public Turret() {
+    // spin = new TalonSRX(0);
     spin = new TalonSRX(11);
     tilt = new TalonSRX(12);
 

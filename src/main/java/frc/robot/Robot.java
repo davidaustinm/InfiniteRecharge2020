@@ -82,7 +82,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    
     colorSensor.displayColor();
     SmartDashboard.putNumber("gyro", navx.readGyro());
     double[] driveEncoders = driveTrain.getDriveDistance();

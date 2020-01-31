@@ -9,16 +9,21 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+// import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TurretShooter extends SubsystemBase {
+  // TalonFX shooter0, shooter1;
   TalonSRX shooter0, shooter1;
 
   public TurretShooter() {
     shooter0 = new TalonSRX(15);
     shooter1 = new TalonSRX(23);
+
+    // shooter0 = new TalonFX(6);
+    // shooter1 = new TalonFX(7);
 
     shooter0.setInverted(true);
     shooter1.setInverted(true);
