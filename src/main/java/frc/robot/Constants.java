@@ -16,6 +16,43 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    //Falcons
     public static final int LEFT_MASTER = 0;
     public static final int LEFT_SLAVE1 = 1;
+    public static final int LEFT_SLAVE2 = 2;
+    public static final int RIGHT_MASTER = 3;
+    public static final int RIGHT_SLAVE1 = 4;
+    public static final int RIGHT_SLAVE2 = 5;
+    public static final int TURRET_SHOOTER1 = 6;
+    public static final int TURRET_SHOOTER2 = 7;
+
+    //Victors
+    public static final int BALL_DELIVERY1 = 0;
+    public static final int BALL_DELIVERY2 = 1;
+    public static final int BALL_DELIVERY3 = 2;
+    public static final int BALL_DELIVERY4 = 3;
+    public static final int HANGING_MOTOR1 = 4;
+    public static final int HANGING_MOTOR2 = 5;
+    public static final int THE_SINGULATOR = 6;
+
+    //Spark Max
+    public static final int CONTROL_WHEEL = 1;
+
+    //Talons
+    public static final int TURRET_ROTATE = 0;
+
+    //Servo
+    public static final int SHOOTER_HOOD_SERVO = 0;
+
+    //Encoders
+    public static final int DRIVE_TRAIN_LEFT = 0;
+    public static final int DRIVE_TRAIN_RIGHT = 4;
+
+    //Pneumatics
+    public static final int SHIFT = 0;
+    public static final int INTAKE = 1;
+    public static final int CONTROL_WHEEL_EXTEND = 2;
+    public static final int SHOOTER_HOOD = 3;
+    public static final int HANGING_TILT = 4;
+    public static final int HANGING_LOCK = 5;
 }

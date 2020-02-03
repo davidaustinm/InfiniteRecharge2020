@@ -7,25 +7,43 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class InfiniteDriveTrain extends SubsystemBase {
   TalonFX leftMaster, leftSlave1, leftSlave2, rightMaster, rightSlave1, rightSlave2;
+
+  DutyCycleEncoder leftDriveEncoder, rightDriveEncoder;
   /**
    * Creates a new InfiniteDriveTrain.
    */
   public InfiniteDriveTrain() {
-    leftMaster = new TalonFX(0);
-    leftSlave1 = new TalonFX(1);
-    leftSlave2 = new TalonFX(2);
-    rightMaster = new TalonFX(3);
-    rightSlave1 = new TalonFX(4);
-    rightSlave2 = new TalonFX(5);
+    leftDriveEncoder = new DutyCycleEncoder(Constants.DRIVE_TRAIN_LEFT);
+    rightDriveEncoder = new DutyCycleEncoder(Constants.DRIVE_TRAIN_RIGHT);
+    leftMaster = new TalonFX(Constants.LEFT_MASTER);
+    leftSlave1 = new TalonFX(Constants.LEFT_SLAVE1);
+    leftSlave2 = new TalonFX(Constants.LEFT_SLAVE2);
+    rightMaster = new TalonFX(Constants.RIGHT_MASTER);
+    rightSlave1 = new TalonFX(Constants.RIGHT_SLAVE1);
+    rightSlave2 = new TalonFX(Constants.RIGHT_SLAVE2);
 
     leftMaster.setInverted(true);
     rightMaster.setInverted(true);
+
+    leftSlave1.follow(leftMaster);
+    leftSlave2.follow(leftMaster);
+
+    rightSlave1.follow(rightMaster);
+    rightSlave2.follow(rightMaster);
+  }
+
+  public void setPower(double leftPower, double rightPower){
+    leftMaster.set(ControlMode.PercentOutput, leftPower);
+    rightMaster.set(ControlMode.PercentOutput, rightPower);
   }
 
   @Override

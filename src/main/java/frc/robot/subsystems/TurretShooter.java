@@ -22,8 +22,8 @@ public class TurretShooter extends SubsystemBase {
     shooter0 = new TalonSRX(15);
     shooter1 = new TalonSRX(23);
 
-    // shooter0 = new TalonFX(6);
-    // shooter1 = new TalonFX(7);
+    // shooter0 = new TalonFX(Constants.TURRET_SHOOTER1);
+    // shooter1 = new TalonFX(Constants.TURRET_SHOOTER2);
 
     shooter0.setInverted(true);
     shooter1.setInverted(true);

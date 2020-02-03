@@ -8,29 +8,22 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ColorWheelRotateSubsystem extends SubsystemBase {
   CANSparkMax rotateWheel;
-  CANPIDController rotateWheelPID = new CANPIDController(rotateWheel);
   CANEncoder encoder;
   
   public ColorWheelRotateSubsystem() {
-    rotateWheel = new CANSparkMax(1, MotorType.kBrushless);
+    rotateWheel = new CANSparkMax(Constants.CONTROL_WHEEL, MotorType.kBrushless);
     rotateWheel.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 10);
     encoder = rotateWheel.getEncoder();
-    rotateWheelPID.setP(0.005);
-  }
-
-  public void setPositionChange(double position){
-    rotateWheelPID.setReference(getPosition() + position, ControlType.kPosition);
   }
 
   public void setPower(double power){
