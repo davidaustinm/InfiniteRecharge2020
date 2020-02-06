@@ -7,35 +7,23 @@
 
 package frc.robot.subsystems;
 
-import com.kauailabs.navx.frc.AHRS;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class NavX extends SubsystemBase {
-  AHRS navx;
-  double gyroOffset = 0;
-
-  public NavX() {
-    try {
-			navx = new AHRS(Port.kMXP);
-		} catch (RuntimeException ex ) {
-      System.out.println("Error instantiating navX MXP:  " + ex.getMessage());
-    }
-  }
-
-  public double readGyro() {
-    return -navx.getYaw();
-  }
-
-  public double getHeading(){
-    return readGyro()- gyroOffset;
-  }
-
-  public void resetGyro(){
-    gyroOffset = readGyro();
-  }
+public class ShooterFeederSubsystem extends SubsystemBase {
+  VictorSPX turretFeederVictor;
   
+  public ShooterFeederSubsystem() {
+    turretFeederVictor = new VictorSPX(Constants.SHOOTER_FEEDER);
+  }
+
+  public void setTurretFeederPower(double power){
+    turretFeederVictor.set(ControlMode.PercentOutput, power);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -17,9 +17,9 @@ import frc.robot.utilities.VectorMath;
 
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = new ExecuteProfile("speed-profile.csv");;
+  private Command m_autonomousCommand = new ExecuteProfile("speed-profile.csv");
 
-
+  public static InfiniteDriveTrain infiniteDriveTrain = new InfiniteDriveTrain();
   public static DriveTrain driveTrain = new DriveTrain();
   public static Turret turret = new Turret();
   public static TurretShooter turretShooter = new TurretShooter();
@@ -27,6 +27,8 @@ public class Robot extends TimedRobot {
   public static NavX navx = new NavX();
   public static ColorSensor colorSensor = new ColorSensor();
   public static ConvayorSubsystem convayorSubsystem = new ConvayorSubsystem();
+  public static Pneumatics pneumatics = new Pneumatics();
+  public static ColorWheelRotateSubsystem colorWheelRotateSubsystem = new ColorWheelRotateSubsystem();
     
   public static OI oi = new OI();
   public static Position position = new Position();

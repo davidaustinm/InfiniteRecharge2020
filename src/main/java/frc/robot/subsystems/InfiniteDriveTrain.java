@@ -16,11 +16,12 @@ import frc.robot.Constants;
 
 public class InfiniteDriveTrain extends SubsystemBase {
   TalonFX leftMaster, leftSlave1, leftSlave2, rightMaster, rightSlave1, rightSlave2;
-
   DutyCycleEncoder leftDriveEncoder, rightDriveEncoder;
-  /**
-   * Creates a new InfiniteDriveTrain.
-   */
+
+  double leftDriveOffset = 0, rightDriveOffset = 0, leftDistanceOffset = 0, rightDistanceOffset = 0;
+  double yLimit = 1;
+  double xLimit = 1;
+
   public InfiniteDriveTrain() {
     leftDriveEncoder = new DutyCycleEncoder(Constants.DRIVE_TRAIN_LEFT);
     rightDriveEncoder = new DutyCycleEncoder(Constants.DRIVE_TRAIN_RIGHT);
@@ -41,9 +42,73 @@ public class InfiniteDriveTrain extends SubsystemBase {
     rightSlave2.follow(rightMaster);
   }
 
+  public void resetDriveEncoders() {
+    leftDriveOffset = leftDriveEncoder.get();
+    rightDriveOffset = rightDriveEncoder.get();
+    leftDistanceOffset = leftDriveEncoder.getDistance();
+    rightDistanceOffset = rightDriveEncoder.getDistance();
+  }
+
+  public double[] getDriveEncoder() {
+    return new double[] { leftDriveEncoder.get() - leftDriveOffset, rightDriveEncoder.get() - rightDriveOffset};
+  }
+
+  public double[] getDriveDistance() {
+    return new double[] { getLeftDistance(), getRightDistance() };
+  }
+
+  public double getLeftDistance() {
+    return leftDriveEncoder.getDistance() - leftDistanceOffset;
+  }
+
+  public double getRightDistance() {
+    return rightDriveEncoder.getDistance() - rightDistanceOffset;
+  }
+
   public void setPower(double leftPower, double rightPower){
     leftMaster.set(ControlMode.PercentOutput, leftPower);
     rightMaster.set(ControlMode.PercentOutput, rightPower);
+  }
+
+  public void arcadeDrive(double moveValue, double rotateValue, boolean squaredInputs) {
+    double leftMotorSpeed = 0;
+    double rightMotorSpeed = 0;
+
+    moveValue *= yLimit;
+    rotateValue *= xLimit;
+
+    if(squaredInputs){
+      if(moveValue >= 0.0){
+        moveValue = moveValue * moveValue;
+      } else {
+        moveValue = -(moveValue * moveValue);
+      }
+
+      if(rotateValue >= 0.0) {
+        rotateValue = rotateValue * rotateValue;
+      } else {
+        rotateValue = -(rotateValue * rotateValue);
+      }
+
+      if (moveValue > 0.0) {
+        if (rotateValue > 0.0) {
+          leftMotorSpeed = moveValue - rotateValue;
+          rightMotorSpeed = Math.max(moveValue, rotateValue);
+        } else {
+          leftMotorSpeed = Math.max(moveValue, -rotateValue);
+          rightMotorSpeed = moveValue + rotateValue;
+        }
+      } else {
+        if (rotateValue > 0.0) {
+          leftMotorSpeed = -Math.max(-moveValue, rotateValue);
+          rightMotorSpeed = moveValue + rotateValue;
+        } else {
+          leftMotorSpeed = moveValue - rotateValue;
+          rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
+        }
+      }
+      setPower(leftMotorSpeed, rightMotorSpeed);
+    }
   }
 
   @Override

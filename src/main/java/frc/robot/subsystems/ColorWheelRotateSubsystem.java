@@ -15,6 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class ColorWheelRotateSubsystem extends SubsystemBase {
   CANSparkMax rotateWheel;
@@ -28,6 +29,10 @@ public class ColorWheelRotateSubsystem extends SubsystemBase {
 
   public void setPower(double power){
     rotateWheel.set(power);
+  }
+
+  public void extendControlWheel(boolean extend){
+    Robot.pneumatics.setState(Pneumatics.CONTROL_WHEEL, extend);
   }
 
   public double getPosition(){

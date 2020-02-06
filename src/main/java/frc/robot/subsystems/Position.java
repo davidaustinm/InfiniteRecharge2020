@@ -18,6 +18,7 @@ public class Position extends SubsystemBase {
   double[] lastDriveDistance;
 
   public Position() {
+    // lastDriveDistance = Robot.infiniteDriveTrain.getDriveDistance();
     lastDriveDistance = Robot.driveTrain.getDriveDistance();
   }
 
@@ -28,12 +29,14 @@ public class Position extends SubsystemBase {
   public void resetPosition() {
     positionX = 0;
     positionY = 0;
+    // lastDriveDistance = Robot.infiniteDriveTrain.getDriveDistance();
     lastDriveDistance = Robot.driveTrain.getDriveDistance();
   }
 
   public void updatePosition() {
     double heading = Math.toRadians(Robot.navx.getHeading());
     double[] driveDistance = Robot.driveTrain.getDriveDistance();
+    // double[] driveDistance = Robot.infiniteDriveTrain.getDriveDistance();
     double[] changeDriveDistance = VectorMath.sub(driveDistance, lastDriveDistance);
     double distance = VectorMath.avg(changeDriveDistance);
     positionX += distance * Math.cos(heading);

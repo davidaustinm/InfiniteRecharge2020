@@ -41,8 +41,8 @@ public class TurretShooter extends SubsystemBase {
     shooter1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   }
 
-  public void setTurretVelocity(double velocity){
-    if(velocity >= 2000){
+  public void setTurretVelocity(double velocity) {
+    if (velocity >= 2000) {
       shooter0.selectProfileSlot(0, 0);
       shooter1.selectProfileSlot(0, 0);
     } else {
@@ -53,7 +53,7 @@ public class TurretShooter extends SubsystemBase {
     shooter1.set(ControlMode.Velocity, velocity);
   }
 
-  public void setTurretPower(double power){
+  public void setTurretPower(double power) {
     shooter0.set(ControlMode.PercentOutput, -power);
     shooter1.set(ControlMode.PercentOutput, -power);
   }

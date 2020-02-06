@@ -8,15 +8,17 @@
 package frc.robot;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants.  This class should not be used for any other purpose.  All constants should be
- * declared globally (i.e. public static).  Do not put anything functional in this class.
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean constants. This class should not be used for any other
+ * purpose. All constants should be declared globally (i.e. public static). Do
+ * not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    //Falcons
+    // Falcons
     public static final int LEFT_MASTER = 0;
     public static final int LEFT_SLAVE1 = 1;
     public static final int LEFT_SLAVE2 = 2;
@@ -26,33 +28,36 @@ public final class Constants {
     public static final int TURRET_SHOOTER1 = 6;
     public static final int TURRET_SHOOTER2 = 7;
 
-    //Victors
-    public static final int BALL_DELIVERY1 = 0;
-    public static final int BALL_DELIVERY2 = 1;
-    public static final int BALL_DELIVERY3 = 2;
-    public static final int BALL_DELIVERY4 = 3;
-    public static final int HANGING_MOTOR1 = 4;
-    public static final int HANGING_MOTOR2 = 5;
-    public static final int THE_SINGULATOR = 6;
+    // Victors
+    public static final int BALL_DELIVERY = 0;
+    public static final int SHOOTER_FEEDER = 1;
+    public static final int HANGING_MOTOR1 = 2;
+    public static final int HANGING_MOTOR2 = 3;
+    public static final int THE_SINGULATOR = 4;
+    public static final int INTAKE_MOTOR = 5;
 
-    //Spark Max
+    // Spark Max
     public static final int CONTROL_WHEEL = 1;
 
-    //Talons
+    // Talons
     public static final int TURRET_ROTATE = 0;
 
-    //Servo
+    // Servo
     public static final int SHOOTER_HOOD_SERVO = 0;
 
-    //Encoders
+    // Encoders
     public static final int DRIVE_TRAIN_LEFT = 0;
     public static final int DRIVE_TRAIN_RIGHT = 4;
 
-    //Pneumatics
+    // Pneumatics
     public static final int SHIFT = 0;
     public static final int INTAKE = 1;
     public static final int CONTROL_WHEEL_EXTEND = 2;
     public static final int SHOOTER_HOOD = 3;
     public static final int HANGING_TILT = 4;
     public static final int HANGING_LOCK = 5;
+
+    //DIO
+    public static final int PHOTOEYE_TOP = 8;
+    public static final int PHOTOEYE_BOTTOM = 9;
 }
