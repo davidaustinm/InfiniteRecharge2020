@@ -29,9 +29,11 @@ public class Robot extends TimedRobot {
   public static ConvayorSubsystem convayorSubsystem = new ConvayorSubsystem();
   public static Pneumatics pneumatics = new Pneumatics();
   public static ColorWheelRotateSubsystem colorWheelRotateSubsystem = new ColorWheelRotateSubsystem();
-    
   public static OI oi = new OI();
   public static Position position = new Position();
+
+  double[] lastDriveEncoders;
+  long lastTime;
 
   @Override
   public void robotInit() {
@@ -40,7 +42,6 @@ public class Robot extends TimedRobot {
     limelight.setDefaultCommand(new LimeLightCommand());
     colorSensor.setDefaultCommand(new ColorSensorCommand());
   }
-
 
   @Override
   public void robotPeriodic() {
@@ -67,9 +68,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+
   }
-  double[] lastDriveEncoders;
-  long lastTime;
+
   @Override
   public void teleopInit() {
     lastDriveEncoders = driveTrain.getDriveDistance();
