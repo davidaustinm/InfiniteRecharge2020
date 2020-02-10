@@ -20,13 +20,13 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand = new ExecuteProfile("speed-profile.csv");
 
   public static InfiniteDriveTrain driveTrain = new InfiniteDriveTrain();
-  //public static DriveTrain driveTrain = new DriveTrain();
+  // public static DriveTrain driveTrain = new DriveTrain();
   public static Turret turret = new Turret();
   public static TurretShooter turretShooter = new TurretShooter();
   public static LimeLight limelight = new LimeLight();
   public static NavX navx = new NavX();
   public static ColorSensor colorSensor = new ColorSensor();
-  public static ConvayorSubsystem convayorSubsystem = new ConvayorSubsystem();
+  // public static ConvayorSubsystem convayorSubsystem = new ConvayorSubsystem();
   public static Pneumatics pneumatics = new Pneumatics();
   public static ColorWheelRotateSubsystem colorWheelRotateSubsystem = new ColorWheelRotateSubsystem();
   public static OI oi = new OI();
@@ -58,8 +58,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    navx.resetGyro();
-    position.resetPosition();
+    // navx.resetGyro();
+    // position.resetPosition();
     
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -79,22 +79,22 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    navx.resetGyro();
-    position.resetPosition();
+    // navx.resetGyro();
+    // position.resetPosition();
   }
 
   @Override
   public void teleopPeriodic() {
-    colorSensor.displayColor();
-    SmartDashboard.putNumber("gyro", navx.readGyro());
-    double[] driveEncoders = driveTrain.getDriveDistance();
-    long time = System.currentTimeMillis();
-    double distance = VectorMath.avg(VectorMath.sub(driveEncoders, lastDriveEncoders));
-    double velocity = distance/(time - lastTime) * 1000;
-    lastTime = time;
-    lastDriveEncoders = driveEncoders;
-    // System.out.println(velocity);
-    SmartDashboard.putNumber("velocity", velocity);
+    // colorSensor.displayColor();
+    // SmartDashboard.putNumber("gyro", navx.readGyro());
+    // double[] driveEncoders = driveTrain.getDriveDistance();
+    // long time = System.currentTimeMillis();
+    // double distance = VectorMath.avg(VectorMath.sub(driveEncoders, lastDriveEncoders));
+    // double velocity = distance/(time - lastTime) * 1000;
+    // lastTime = time;
+    // lastDriveEncoders = driveEncoders;
+    // // System.out.println(velocity);
+    // SmartDashboard.putNumber("velocity", velocity);
   }
 
   @Override

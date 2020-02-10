@@ -19,14 +19,14 @@ package frc.robot;
  */
 public final class Constants {
     // Falcons
-    public static final int LEFT_MASTER = 0;
-    public static final int LEFT_SLAVE1 = 1;
-    public static final int LEFT_SLAVE2 = 2;
-    public static final int RIGHT_MASTER = 3;
-    public static final int RIGHT_SLAVE1 = 4;
-    public static final int RIGHT_SLAVE2 = 5;
-    public static final int TURRET_SHOOTER1 = 6;
-    public static final int TURRET_SHOOTER2 = 7;
+    public static final int LEFT_MASTER = 1;
+    public static final int LEFT_SLAVE1 = 2;
+    public static final int LEFT_SLAVE2 = 3;
+    public static final int RIGHT_MASTER = 4;
+    public static final int RIGHT_SLAVE1 = 5;
+    public static final int RIGHT_SLAVE2 = 6;
+    public static final int TURRET_SHOOTER1 = 7;
+    public static final int TURRET_SHOOTER2 = 8;
 
     // Victors
     public static final int BALL_DELIVERY = 0;
