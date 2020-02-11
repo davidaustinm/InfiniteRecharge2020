@@ -17,7 +17,7 @@ import frc.robot.utilities.*;
 
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = null; // = new ExecuteProfile("speed-profile.csv");
+  private Command m_autonomousCommand; 
   public static OI oi = new OI();
   public static RobotState robotstate = new RobotState();
   
@@ -34,6 +34,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     driveTrain = new InfiniteDriveTrain();
+    navx = new NavX();
+    position = new Position();
+
     /*
     turret = new Turret();
     shooter = new ShooterSubsystem();
@@ -43,8 +46,7 @@ public class Robot extends TimedRobot {
     pneumatics = new Pneumatics();
     colorWheelRotateSubsystem = new ColorWheelRotateSubsystem();
     */
-    //position = new Position();
-
+    
     driveTrain.setDefaultCommand(new ArcadeDriveCommand());
     /*
     turret.setDefaultCommand(new TurretCommand());
@@ -68,8 +70,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    // navx.resetGyro();
-    // position.resetPosition();
+    m_autonomousCommand = new ExecuteProfile("trench-profile.csv");
+    navx.resetGyro();
+    position.resetPosition();
     
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -110,6 +113,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("velocity", velocity);
     SmartDashboard.putNumber("left Drive", driveEncoders[0]);
     SmartDashboard.putNumber("right Drive", driveEncoders[1]);
+    SmartDashboard.putNumber("gyro", navx.getHeading());
   }
 
   @Override
