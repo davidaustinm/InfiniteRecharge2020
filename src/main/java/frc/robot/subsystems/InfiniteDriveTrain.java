@@ -33,6 +33,9 @@ public class InfiniteDriveTrain extends SubsystemBase {
     rightSlave1 = new TalonFX(Constants.RIGHT_SLAVE1);
     rightSlave2 = new TalonFX(Constants.RIGHT_SLAVE2);
 
+    leftDriveEncoder.setDistancePerRotation(Constants.INCHES_PER_REV);
+    rightDriveEncoder.setDistancePerRotation(-Constants.INCHES_PER_REV);
+
     leftMaster.setInverted(true);
     rightSlave1.setInverted(true);
     rightSlave2.setInverted(true);

@@ -85,6 +85,7 @@ public class Robot extends TimedRobot {
   long lastTime;
   @Override
   public void teleopInit() {
+    driveTrain.resetDriveEncoders();
     lastDriveEncoders = driveTrain.getDriveDistance();
     lastTime = System.currentTimeMillis();
     // System.out.println(Filesystem.getDeployDirectory());
@@ -99,7 +100,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // colorSensor.displayColor();
     // SmartDashboard.putNumber("gyro", navx.readGyro());
-    double[] driveEncoders = driveTrain.getDriveEncoder();
+    double[] driveEncoders = driveTrain.getDriveDistance();
     long time = System.currentTimeMillis();
     double distance = VectorMath.avg(VectorMath.sub(driveEncoders, lastDriveEncoders));
     double velocity = distance/(time - lastTime) * 1000;

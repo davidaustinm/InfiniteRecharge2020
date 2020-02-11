@@ -60,4 +60,7 @@ public final class Constants {
     //DIO
     public static final int PHOTOEYE_TOP = 8;
     public static final int PHOTOEYE_BOTTOM = 9;
+
+    //OTHER
+    public static final double INCHES_PER_REV = (6.0 * Math.PI) * (100.0/97.0);
 }
