@@ -31,9 +31,6 @@ public class Robot extends TimedRobot {
   public static ColorWheelRotateSubsystem colorWheelRotateSubsystem; 
   public static Position position;
   
-  double[] lastDriveEncoders;
-  long lastTime;
-
   @Override
   public void robotInit() {
     driveTrain = new InfiniteDriveTrain();
@@ -84,6 +81,8 @@ public class Robot extends TimedRobot {
 
   }
 
+  double[] lastDriveEncoders;
+  long lastTime;
   @Override
   public void teleopInit() {
     lastDriveEncoders = driveTrain.getDriveDistance();
@@ -100,14 +99,16 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // colorSensor.displayColor();
     // SmartDashboard.putNumber("gyro", navx.readGyro());
-    // double[] driveEncoders = driveTrain.getDriveDistance();
-    // long time = System.currentTimeMillis();
-    // double distance = VectorMath.avg(VectorMath.sub(driveEncoders, lastDriveEncoders));
-    // double velocity = distance/(time - lastTime) * 1000;
-    // lastTime = time;
-    // lastDriveEncoders = driveEncoders;
+    double[] driveEncoders = driveTrain.getDriveEncoder();
+    long time = System.currentTimeMillis();
+    double distance = VectorMath.avg(VectorMath.sub(driveEncoders, lastDriveEncoders));
+    double velocity = distance/(time - lastTime) * 1000;
+    lastTime = time;
+    lastDriveEncoders = driveEncoders;
     // // System.out.println(velocity);
-    // SmartDashboard.putNumber("velocity", velocity);
+    SmartDashboard.putNumber("velocity", velocity);
+    SmartDashboard.putNumber("left Drive", driveEncoders[0]);
+    SmartDashboard.putNumber("right Drive", driveEncoders[1]);
   }
 
   @Override
