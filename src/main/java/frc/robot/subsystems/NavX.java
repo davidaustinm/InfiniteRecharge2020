@@ -18,7 +18,7 @@ public class NavX extends SubsystemBase {
 
   public NavX() {
     try {
-			navx = new AHRS(Port.kMXP);
+			navx = new AHRS(Port.kUSB);
 		} catch (RuntimeException ex ) {
       System.out.println("Error instantiating navX MXP:  " + ex.getMessage());
     }
