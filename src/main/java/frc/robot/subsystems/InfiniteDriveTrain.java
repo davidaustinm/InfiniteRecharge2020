@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
@@ -33,13 +34,17 @@ public class InfiniteDriveTrain extends SubsystemBase {
     rightSlave2 = new TalonFX(Constants.RIGHT_SLAVE2);
 
     leftMaster.setInverted(true);
-    rightMaster.setInverted(true);
+    rightSlave1.setInverted(true);
+    rightSlave2.setInverted(true);
 
     leftSlave1.follow(leftMaster);
     leftSlave2.follow(leftMaster);
 
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
+
+    leftMaster.setNeutralMode(NeutralMode.Brake);
+    rightMaster.setNeutralMode(NeutralMode.Brake);
   }
 
   public void resetDriveEncoders() {

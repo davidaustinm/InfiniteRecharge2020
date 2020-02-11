@@ -25,8 +25,8 @@ public final class Constants {
     public static final int RIGHT_MASTER = 4;
     public static final int RIGHT_SLAVE1 = 5;
     public static final int RIGHT_SLAVE2 = 6;
-    public static final int TURRET_SHOOTER1 = 7;
-    public static final int TURRET_SHOOTER2 = 8;
+    public static final int SHOOTER_MASTER = 7;
+    public static final int SHOOTER_SLAVE = 8;
 
     // Victors
     public static final int BALL_DELIVERY = 0;

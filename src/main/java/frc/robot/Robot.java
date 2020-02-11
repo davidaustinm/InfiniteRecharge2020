@@ -13,34 +13,47 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import frc.robot.utilities.VectorMath;
+import frc.robot.utilities.*;
 
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = new ExecuteProfile("speed-profile.csv");
-
-  public static InfiniteDriveTrain driveTrain = new InfiniteDriveTrain();
-  // public static DriveTrain driveTrain = new DriveTrain();
-  public static Turret turret = new Turret();
-  public static TurretShooter turretShooter = new TurretShooter();
-  public static LimeLight limelight = new LimeLight();
-  public static NavX navx = new NavX();
-  public static ColorSensor colorSensor = new ColorSensor();
-  // public static ConvayorSubsystem convayorSubsystem = new ConvayorSubsystem();
-  public static Pneumatics pneumatics = new Pneumatics();
-  public static ColorWheelRotateSubsystem colorWheelRotateSubsystem = new ColorWheelRotateSubsystem();
+  private Command m_autonomousCommand = null; // = new ExecuteProfile("speed-profile.csv");
   public static OI oi = new OI();
-  public static Position position = new Position();
-
+  public static RobotState robotstate = new RobotState();
+  
+  public static InfiniteDriveTrain driveTrain;
+  public static Turret turret;
+  public static ShooterSubsystem shooter; 
+  public static LimeLight limelight;
+  public static NavX navx;
+  public static ColorSensor colorSensor;
+  public static Pneumatics pneumatics;
+  public static ColorWheelRotateSubsystem colorWheelRotateSubsystem; 
+  public static Position position;
+  
   double[] lastDriveEncoders;
   long lastTime;
 
   @Override
   public void robotInit() {
+    driveTrain = new InfiniteDriveTrain();
+    /*
+    turret = new Turret();
+    shooter = new ShooterSubsystem();
+    limelight = new LimeLight();
+    navx = new NavX();
+    colorSensor = new ColorSensor();
+    pneumatics = new Pneumatics();
+    colorWheelRotateSubsystem = new ColorWheelRotateSubsystem();
+    */
+    //position = new Position();
+
     driveTrain.setDefaultCommand(new ArcadeDriveCommand());
+    /*
     turret.setDefaultCommand(new TurretCommand());
     limelight.setDefaultCommand(new LimeLightCommand());
     colorSensor.setDefaultCommand(new ColorSensorCommand());
+    */
   }
 
   @Override

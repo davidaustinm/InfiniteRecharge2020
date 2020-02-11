@@ -8,31 +8,31 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ColorChangeCount;
-import frc.robot.commands.TrackTarget;
-import frc.robot.commands.TurretShooterCommand;
+import frc.robot.commands.*;
 import frc.robot.utilities.XboxTrigger;
 
 public class OI {
     public XboxController driver;
     public XboxController operator;
-    TrackTarget trackTarget;
-    TurretShooterCommand turretShootCommand;
 
     public OI(){
-        trackTarget = new TrackTarget();
-        turretShootCommand = new TurretShooterCommand();
         driver = new XboxController(0);
         operator = new XboxController(1);
-        XboxTrigger trackingOn = new XboxTrigger(operator, XboxTrigger.LB);
-        trackingOn.whenActive(trackTarget);
-        XboxTrigger trackingOff = new XboxTrigger(operator, XboxTrigger.RB);
-        trackingOff.cancelWhenActive(trackTarget);
+        
+        /*
+        TrackTarget trackTarget = new TrackTarget();
+        XboxTrigger trackingOnOff = new XboxTrigger(operator, XboxTrigger.Y);
+        trackingOnOff.toggleWhenActive(trackTarget, true);
+        */
 
-        XboxTrigger turretShoot = new XboxTrigger(operator, XboxTrigger.DPADUP);
-        turretShoot.toggleWhenActive(turretShootCommand, true);
+        ShooterOnCommand shooterOnCommand = new ShooterOnCommand();
+        XboxTrigger shooterOn = new XboxTrigger(operator, XboxTrigger.DPADUP);
+        shooterOn.toggleWhenActive(shooterOnCommand, true);
+        
+        /*
         XboxTrigger colorCount = new XboxTrigger(operator, XboxTrigger.DPADLEFT);
         colorCount.toggleWhenActive(new ColorChangeCount());
+        */
         
     }
 
