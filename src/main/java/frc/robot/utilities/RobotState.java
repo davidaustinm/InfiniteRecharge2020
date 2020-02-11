@@ -26,24 +26,31 @@ public class RobotState {
     public void setShooterOn(boolean on){
         shooterOn = on;
     }
+
     public boolean isShooterOn(){
         return shooterOn;
     }
-    public boolean isTargetAligned(){
-        return targetAligned;
-    }
+
     public void setTargetAligned(boolean aligned){
         targetAligned = aligned;
     }
+
+    public boolean isTargetAligned(){
+        return targetAligned;
+    }
+
     public void setIntakeOn(boolean on) {
         intakeOn = on;
     }
+
     public boolean isIntakeOn() {
         return intakeOn;
     }
+
     public void setAlignOn(boolean on) {
         alignOn = on;
     }
+
     public boolean isAligning() {
         return alignOn;
     }

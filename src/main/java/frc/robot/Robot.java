@@ -19,7 +19,7 @@ import frc.robot.utilities.*;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand; 
   public static OI oi = new OI();
-  public static RobotState robotstate = new RobotState();
+  public static RobotState robotState = new RobotState();
   
   public static InfiniteDriveTrain driveTrain;
   public static Turret turret;

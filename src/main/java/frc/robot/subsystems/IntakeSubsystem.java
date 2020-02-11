@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -32,5 +33,15 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if(Robot.robotState.isIntakeOn()){
+      extendIntake(true);
+      if(Robot.oi.operator.getTriggerAxis(Hand.kRight) > 0.05){
+        setPower(Robot.oi.operator.getTriggerAxis(Hand.kRight));
+      } else if(Robot.oi.operator.getTriggerAxis(Hand.kLeft) > 0.05){
+        setPower(-Robot.oi.operator.getTriggerAxis(Hand.kLeft));
+      } else {
+        setPower(1);
+      }
+    }
   }
 }
