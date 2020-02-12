@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.utilities.CSVReader;
@@ -70,7 +71,10 @@ public class ExecuteProfile extends CommandBase implements Runnable {
     isNotifierRunning = false;
   }
 
+  double kAngle = 0.0;
+  double kDrive = 0.0;
   public void run() {
+    double vmax = 2.2;
     if(count >= profileLength) {
       Robot.driveTrain.setPower(0,0);
       stopNotifier();
@@ -82,11 +86,14 @@ public class ExecuteProfile extends CommandBase implements Runnable {
     double[] driveDistance = Robot.driveTrain.getDriveDistance();
     double leftError = data[0] - driveDistance[0];
     double rightError = data[2] - driveDistance[1];
-    leftPower += 0.04 * leftError;
-    rightPower += 0.04 * rightError;
+    leftPower += kDrive * leftError;
+    rightPower += kDrive * rightError;
     double angleError = VectorMath.normalizeAngle(data[4] - Robot.navx.getHeading(), 180);
-    leftPower -= 0.02 * angleError;
-    rightPower += 0.02 * angleError;
+    SmartDashboard.putNumber("left error", leftError);
+    SmartDashboard.putNumber("right error", rightError);
+    SmartDashboard.putNumber("angle error", angleError);
+    leftPower -= kAngle * angleError;
+    rightPower += kAngle * angleError;
     Robot.driveTrain.setPower(leftPower, rightPower);
     count += 1;
     // System.out.println(count + " " + vmax + " " + leftPower + " " + rightPower);

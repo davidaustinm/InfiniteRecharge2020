@@ -81,6 +81,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+    SmartDashboard.putNumber("gyro", navx.getHeading());
 
   }
 
